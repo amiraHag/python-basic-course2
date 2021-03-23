@@ -1,6 +1,28 @@
 # -----------------------------------------------------
-# -- Databases => SQLite => Create Skills App Part 1 --
+# -- Databases => SQLite => Create Skills App Part 2 --
 # -----------------------------------------------------
+
+# Import SQLite Module
+import sqlite3
+
+# Create Database And Connect
+db = sqlite3.connect("app.db")
+
+# Setting Up The Cursor
+cr = db.cursor()
+
+# Commit and Close Method
+def commit_and_close():
+
+  # Save (Commit) Changes
+  db.commit()
+
+  # Close Database
+  db.close()
+  print("Connection To Database Is Closed")
+
+# My User ID
+uid = 2
 
 # Input Big Message
 input_message = """
@@ -20,27 +42,41 @@ user_input = input(input_message).strip().lower()
 commands_list = ["s", "a", "d", "u", "q"]
 
 # Define The Methods
-
 def show_skills():
 
   print("Show Skills")
 
+  commit_and_close()
+
 def add_skill():
 
-  print("Add Skill")
+  sk = input("Write Skill Name: ").strip().capitalize()
+
+  prog = input("Write Skill Progress ").strip()
+
+  cr.execute(f"insert into skills(name, progress, user_id) values('{sk}', '{prog}', '{uid}')")
+
+  commit_and_close()
 
 def delete_skill():
 
-  print("Delete Skill")
+  sk = input("Write Skill Name: ").strip().capitalize()
+
+  cr.execute(f"delete from skills where name = '{sk}' and user_id = '{uid}'")
+
+  commit_and_close()
 
 def update_skill():
 
   print("Update Skill Progress")
 
-# Check If Command Is Exists
+  commit_and_close()
+
+
+ # Check If Command Is Exists
 if user_input in commands_list:
 
-  print(f"Command Found {user_input}")
+  # print(f"Command Found {user_input}")
 
   if user_input == "s":
 
