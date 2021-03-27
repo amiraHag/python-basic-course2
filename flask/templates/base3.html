@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}" />
+    {% if title == "Homepage" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+    {% elif title == "Add" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add.css') }}" />
+    {% endif %}
+  </head>
+  <body>
+    {% block body %}
+    {% endblock %}
+  </body>
+</html>
